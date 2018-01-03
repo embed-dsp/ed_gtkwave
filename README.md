@@ -18,7 +18,7 @@ git clone https://github.com/embed-dsp/ed_gtkwave.git
 # Enter the ed_gtkwave directory.
 cd ed_gtkwave
 
-# Edit the Makefile for selecting the GTKave version.
+# Edit the Makefile for selecting the GTKWave source version.
 vim Makefile
 PACKAGE = gtkwave-3.3.86
 
@@ -56,11 +56,11 @@ The build products are installed in the following locations:
 opt
 └── gtkwave
     └── gtkwave-3.3.86
-        ├── linux_x86_64    # 64-bit binaries for Linux
+        ├── linux_x86_64    # 64-bit binaries and libraries for Linux
         │   └── bin
         │       ├── gtkwave
         │       ...
-        ├── linux_x86       # 32-bit binaries for Linux
+        ├── linux_x86       # 32-bit binaries and libraries for Linux
         │   └── bin
         │       ├── gtkwave
         │       ...
