@@ -1,6 +1,8 @@
 
-Compile and Install of GTKWave Tool (Waveform viewer for LXT, LXT2, VZT, FST, GHW, VCD and EVCD files)
-======================================================================================================
+Compile and Install of GTKWave Tool
+===================================
+
+GTKWave is a waveform viewer for LXT, LXT2, VZT, FST, GHW, VCD and EVCD files.
 
 ## Required Packages
 
