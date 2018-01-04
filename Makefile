@@ -6,32 +6,24 @@
 # $Date:     $
 # $Revision: $
 
-# Package name and version number
-PACKAGE = gtkwave-3.3.86
 
+CC = /usr/bin/gcc
 
-# Select between 32-bit or 64-bit machine (Default 64-bit)
-ifeq ($(M),)
-	M = 64
-endif
+# Package.
+PACKAGE_NAME = gtkwave
+PACKAGE_VERSION = 3.3.86
+PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
+# Architecture.
+ARCH = $(shell ./bin/get_arch.sh)
+
+# Installation.
+PREFIX = /opt/gtkwave/$(PACKAGE)
+EXEC_PREFIX = $(PREFIX)/$(ARCH)
 
 # Set number of simultaneous jobs (Default 4)
 ifeq ($(J),)
 	J = 4
-endif
-
-
-CC = /usr/bin/gcc
-
-PREFIX = /opt/gtkwave/$(PACKAGE)
-
-ifeq ($(M), 64)
-	CFLAGS = "-Wall -O2 -m64"
-	EXEC_PREFIX = $(PREFIX)/linux_x86_64
-else
-	CFLAGS = "-Wall -O2 -m32"
-	EXEC_PREFIX = $(PREFIX)/linux_x86
 endif
 
 
@@ -67,7 +59,7 @@ prepare:
 
 .PHONY: configure
 configure:
-	cd build/$(PACKAGE) && ./configure CC=$(CC) CFLAGS=$(CFLAGS) --prefix=$(PREFIX) --exec_prefix=$(EXEC_PREFIX)
+	cd build/$(PACKAGE) && ./configure CC=$(CC) --prefix=$(PREFIX) --exec_prefix=$(EXEC_PREFIX)
 
 
 .PHONY: compile
@@ -82,5 +74,9 @@ install:
 
 .PHONY: clean
 clean:
-	-rm -rf build
-	# cd build/$(PACKAGE) && make clean
+	cd build/$(PACKAGE) && make clean
+
+
+.PHONY: distclean
+distclean:
+	cd build/$(PACKAGE) && make distclean
