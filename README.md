@@ -20,7 +20,7 @@ cd ed_gtkwave
 
 # Edit the Makefile for selecting the GTKWave source version.
 vim Makefile
-PACKAGE = gtkwave-3.3.86
+PACKAGE_VERSION = 3.3.86
 
 # Download GTKWave source package into src/ directory.
 make download
@@ -32,12 +32,8 @@ Build
 # Unpack source code into build/ directory.
 make prepare
 
-# Configure source code for 64-bit compile (Default: M=64).
+# Configure source code.
 make configure
-make configure M=64
-
-# Configure source code for 32-bit compile.
-make configure M=32
 
 # Compile source code using 4 simultaneous jobs (Default: J=4).
 make compile
@@ -70,6 +66,9 @@ opt
 
 Notes
 =====
+
+This has been testes with the following Linux distributions and compilers:
+* `Fedora-27 (64-bit)` and `gcc-7.2.1`
 
 ## Required Packages
 
