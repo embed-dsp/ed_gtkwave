@@ -29,18 +29,19 @@ endif
 
 all:
 	@echo ""
-	@echo "## Get the source"
+	@echo "## Get Source Code"
 	@echo "make download"
 	@echo ""
 	@echo "## Build"
 	@echo "make prepare"
-	@echo "make configure [M=...]"
+	@echo "make configure"
 	@echo "make compile [J=...]"
 	@echo ""
 	@echo "## Install"
 	@echo "sudo make install"
 	@echo ""
 	@echo "## Cleanup"
+	@echo "make distclean"
 	@echo "make clean"
 	@echo ""
 
