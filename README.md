@@ -2,18 +2,39 @@
 Compile and Install of the GTKWave Tool
 =======================================
 
-This repository contains make file for easy compile and install of the GTKWave Tool.
+This repository contains make file for easy compile and install of [GTKWave](http://gtkwave.sourceforge.net).
 GTKWave is a waveform viewer for LXT, LXT2, VZT, FST, GHW, VCD and EVCD files.
 
-Get tool and source code
-========================
+Prerequisites
+=============
+
+## Fedora-27
+```bash
+zlib
+zlib-devel
+
+bzip2-devel
+bzip2-libs
+
+xz-devel
+xz-libs
+
+tcl
+tcl-devel
+
+tk
+tk-devel
+```
+
+Get Source Code
+===============
 
 ## ed_gtkwave
 ```bash
 git clone https://github.com/embed-dsp/ed_gtkwave.git
 ```
 
-## GTKWave Source
+## GTKWave
 ```bash
 # Enter the ed_gtkwave directory.
 cd ed_gtkwave
@@ -69,22 +90,3 @@ Notes
 
 This has been testes with the following Linux distributions and compilers:
 * `Fedora-27 (64-bit)` and `gcc-7.2.1`
-
-## Required Packages
-
-```bash
-zlib
-zlib-devel
-
-bzip2-devel
-bzip2-libs
-
-xz-devel
-xz-libs
-
-tcl
-tcl-devel
-
-tk
-tk-devel
-```
