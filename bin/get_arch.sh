@@ -7,6 +7,7 @@
 # $Date:     $
 # $Revision: $
 
+
 kernel=$(uname -s)
 machine=$(uname -m)
 
@@ -24,14 +25,20 @@ machine=$(uname -m)
 
 # Unify Intel/AMD machine names.
 case $machine in
-    i386)
-        machine="x86"
+    i386 | i686)
+        if [ "$1" == "64" ]; then
+            echo "* ERROR *: 64-bit not supported: $machine"
+            exit 1
+        else
+            machine="x86"
+        fi
         ;;
-    i686)
-        machine="x86"
-        ;;
-    amd64)
-        machine="x86_64"
+    x86_64 | amd64)
+        if [ "$1" == "32" ]; then
+            machine="x86"
+        else
+            machine="x86_64"
+        fi
         ;;
 esac
 

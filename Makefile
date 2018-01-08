@@ -7,15 +7,26 @@
 # $Revision: $
 
 
-CC = /usr/bin/gcc
-
 # Package.
 PACKAGE_NAME = gtkwave
 PACKAGE_VERSION = 3.3.86
 PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
+# Build for 32-bit or 64-bit (Default)
+ifeq ($(M),)
+	M = 64
+endif
+
+ifeq ($(M),64)
+	CFLAGS = -Wall -O2 -m64
+else
+	CFLAGS = -Wall -O2 -m32
+endif
+
+CC = /usr/bin/gcc
+
 # Architecture.
-ARCH = $(shell ./bin/get_arch.sh)
+ARCH = $(shell ./bin/get_arch.sh $(M))
 
 # Installation.
 PREFIX = /opt/gtkwave/$(PACKAGE)
@@ -34,7 +45,7 @@ all:
 	@echo ""
 	@echo "## Build"
 	@echo "make prepare"
-	@echo "make configure"
+	@echo "make configure [M=...]"
 	@echo "make compile [J=...]"
 	@echo ""
 	@echo "## Install"
@@ -60,7 +71,7 @@ prepare:
 
 .PHONY: configure
 configure:
-	cd build/$(PACKAGE) && ./configure CC=$(CC) --prefix=$(PREFIX) --exec_prefix=$(EXEC_PREFIX)
+	cd build/$(PACKAGE) && ./configure CC=$(CC) CFLAGS="$(CFLAGS)" --prefix=$(PREFIX) --exec_prefix=$(EXEC_PREFIX)
 
 
 .PHONY: compile

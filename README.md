@@ -23,7 +23,9 @@ tcl
 tcl-devel
 
 tk
-tk-devel
+
+gtk2
+gtk2-devel
 ```
 
 Get Source Code
@@ -53,8 +55,12 @@ Build
 # Unpack source code into build/ directory.
 make prepare
 
-# Configure source code.
+# Configure source code for 64-bit compile (Default: M=64).
 make configure
+make configure M=64
+
+# Configure source code for 32-bit compile.
+make configure M=32
 
 # Compile source code using 4 simultaneous jobs (Default: J=4).
 make compile
@@ -70,18 +76,18 @@ sudo make install
 
 The build products are installed in the following locations:
 ```bash
-opt
-└── gtkwave
-    └── gtkwave-3.3.86
-        ├── linux_x86_64    # 64-bit binaries and libraries for Linux
-        │   └── bin
+opt/
+└── gtkwave/
+    └── gtkwave-3.3.86/
+        ├── linux_x86_64/   # 64-bit binaries and libraries for Linux
+        │   └── bin/
         │       ├── gtkwave
         │       ...
-        ├── linux_x86       # 32-bit binaries and libraries for Linux
-        │   └── bin
+        ├── linux_x86/      # 32-bit binaries and libraries for Linux
+        │   └── bin/
         │       ├── gtkwave
         │       ...
-        └── share           # ...
+        └── share/          # ...
             ...
 ```
 
