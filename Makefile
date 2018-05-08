@@ -9,7 +9,7 @@
 
 # Package.
 PACKAGE_NAME = gtkwave
-PACKAGE_VERSION = 3.3.86
+PACKAGE_VERSION = 3.3.89
 PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
 # Build for 32-bit or 64-bit (Default)
