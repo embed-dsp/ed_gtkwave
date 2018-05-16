@@ -7,7 +7,7 @@ GTKWave is a waveform viewer for LXT, LXT2, VZT, FST, GHW, VCD and EVCD files.
 
 # Prerequisites
 
-## Fedora-27 64-bit
+## Fedora-27 64-bit | Fedora-28 64-bit
 
 ```bash
 dnf install gcc-c++
@@ -114,3 +114,5 @@ This has been testes with the following Linux distributions and compilers:
 * `Fedora-27 (64-bit)`
     * `gcc-7.2.1`
     * `gcc-7.3.1`
+* `Fedora-28 (64-bit)`
+    * `gcc-8.1.1`
