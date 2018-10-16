@@ -31,15 +31,11 @@ MACH = $(shell ./bin/get_machine.sh $(M))
 # Architecture.
 ARCH = $(KERN)_$(MACH)
 
-# Compiler.
-CC = /usr/bin/gcc
-CFLAGS = -Wall -O2
-
-# Installation.
-PREFIX = /opt/gtkwave/$(PACKAGE)
-
 # ...
 CONFIGURE_FLAGS =
+
+# Compiler.
+CFLAGS = -Wall -O2
 
 ifeq ($(M),64)
 	CFLAGS += -m64
@@ -47,24 +43,41 @@ else
 	CFLAGS += -m32
 endif
 
-# MinGW specifics.
-ifeq ($(KERN),mingw32)
-	CC = /mingw/bin/gcc
-	PREFIX = /c/opt/gtkwave/$(PACKAGE)
-endif
-
-# MinGW-W64 specifics.
-ifeq ($(KERN),mingw64)
-	CC = /mingw64/bin/gcc
-	PREFIX = /c/opt/gtkwave/$(PACKAGE)
-	CONFIGURE_FLAGS += --with-tcl=/mingw64/lib --with-tk=/mingw64/lib
+# Linux specifics.
+ifeq ($(KERN),linux)
+	# Compiler.
+	CC = /usr/bin/gcc
+	# Installation directory.
+	INSTALL_DIR = /opt
 endif
 
 # Cygwin specifics.
 ifeq ($(KERN),cygwin)
-	PREFIX = /cygdrive/c/opt/gtkwave/$(PACKAGE)
+	# Compiler.
+	CC = /usr/bin/gcc
+	# Installation directory.
+	INSTALL_DIR = /cygdrive/c/opt
 endif
 
+# MinGW specifics.
+ifeq ($(KERN),mingw32)
+	# Compiler.
+	CC = /mingw/bin/gcc
+	# Installation directory.
+	INSTALL_DIR = /c/opt
+endif
+
+# MinGW-W64 specifics.
+ifeq ($(KERN),mingw64)
+	CONFIGURE_FLAGS += --with-tcl=/mingw64/lib --with-tk=/mingw64/lib
+	# Compiler.
+	CC = /mingw64/bin/gcc
+	# Installation directory.
+	INSTALL_DIR = /c/opt
+endif
+
+# Installation directory.
+PREFIX = $(INSTALL_DIR)/gtkwave/$(PACKAGE)
 EXEC_PREFIX = $(PREFIX)/$(ARCH)
 
 
@@ -82,8 +95,8 @@ all:
 	@echo "sudo make install"
 	@echo ""
 	@echo "## Cleanup"
-	@echo "make distclean"
 	@echo "make clean"
+	@echo "make distclean"
 	@echo ""
 
 
