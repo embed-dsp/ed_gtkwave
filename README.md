@@ -112,7 +112,7 @@ The build products are installed in the following locations:
 ```bash
 opt/
 └── gtkwave/
-    └── gtkwave-3.3.92/     # prefix:
+    └── gtkwave-3.3.95/     # prefix:
         ├── linux_x86_64/   # exec_prefix: 64-bit binaries and libraries for Linux
         │   └── bin/        # bindir:
         │       ├── gtkwave

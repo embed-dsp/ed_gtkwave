@@ -47,17 +47,20 @@ else
 	CFLAGS += -m32
 endif
 
+# MinGW specifics.
 ifeq ($(KERN),mingw32)
 	CC = /mingw/bin/gcc
 	PREFIX = /c/opt/gtkwave/$(PACKAGE)
 endif
 
+# MinGW-W64 specifics.
 ifeq ($(KERN),mingw64)
 	CC = /mingw64/bin/gcc
 	PREFIX = /c/opt/gtkwave/$(PACKAGE)
 	CONFIGURE_FLAGS += --with-tcl=/mingw64/lib --with-tk=/mingw64/lib
 endif
 
+# Cygwin specifics.
 ifeq ($(KERN),cygwin)
 	PREFIX = /cygdrive/c/opt/gtkwave/$(PACKAGE)
 endif
