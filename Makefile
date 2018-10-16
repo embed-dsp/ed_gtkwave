@@ -9,7 +9,7 @@
 
 # Package.
 PACKAGE_NAME = gtkwave
-PACKAGE_VERSION = 3.3.89
+PACKAGE_VERSION = 3.3.95
 PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
 # Build for 32-bit or 64-bit (Default)
@@ -17,25 +17,52 @@ ifeq ($(M),)
 	M = 64
 endif
 
-ifeq ($(M),64)
-	CFLAGS = -Wall -O2 -m64
-else
-	CFLAGS = -Wall -O2 -m32
-endif
-
-CC = /usr/bin/gcc
-
-# Architecture.
-ARCH = $(shell ./bin/get_arch.sh $(M))
-
-# Installation.
-PREFIX = /opt/gtkwave/$(PACKAGE)
-EXEC_PREFIX = $(PREFIX)/$(ARCH)
-
 # Set number of simultaneous jobs (Default 4)
 ifeq ($(J),)
 	J = 4
 endif
+
+# Kernel.
+KERN = $(shell ./bin/get_kernel.sh)
+
+# Machine.
+MACH = $(shell ./bin/get_machine.sh $(M))
+
+# Architecture.
+ARCH = $(KERN)_$(MACH)
+
+# Compiler.
+CC = /usr/bin/gcc
+CFLAGS = -Wall -O2
+
+# Installation.
+PREFIX = /opt/gtkwave/$(PACKAGE)
+
+# ...
+CONFIGURE_FLAGS =
+
+ifeq ($(M),64)
+	CFLAGS += -m64
+else
+	CFLAGS += -m32
+endif
+
+ifeq ($(KERN),mingw32)
+	CC = /mingw/bin/gcc
+	PREFIX = /c/opt/gtkwave/$(PACKAGE)
+endif
+
+ifeq ($(KERN),mingw64)
+	CC = /mingw64/bin/gcc
+	PREFIX = /c/opt/gtkwave/$(PACKAGE)
+	CONFIGURE_FLAGS += --with-tcl=/mingw64/lib --with-tk=/mingw64/lib
+endif
+
+ifeq ($(KERN),cygwin)
+	PREFIX = /cygdrive/c/opt/gtkwave/$(PACKAGE)
+endif
+
+EXEC_PREFIX = $(PREFIX)/$(ARCH)
 
 
 all:
@@ -71,7 +98,7 @@ prepare:
 
 .PHONY: configure
 configure:
-	cd build/$(PACKAGE) && ./configure CC=$(CC) CFLAGS="$(CFLAGS)" --prefix=$(PREFIX) --exec_prefix=$(EXEC_PREFIX)
+	cd build/$(PACKAGE) && ./configure CC=$(CC) CFLAGS="$(CFLAGS)" --prefix=$(PREFIX) --exec_prefix=$(EXEC_PREFIX) $(CONFIGURE_FLAGS)
 
 
 .PHONY: compile

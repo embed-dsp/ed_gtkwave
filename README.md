@@ -7,6 +7,24 @@ GTKWave is a waveform viewer for LXT, LXT2, VZT, FST, GHW, VCD and EVCD files.
 
 # Prerequisites
 
+## MinGW-W64
+
+```
+FIXME: gperf, flex, bison
+FIXME: tcl, tk
+FIXME: xlib, bzlib, xz
+
+```
+
+## Cygwin 64-bit
+
+```
+zlib
+libbz2
+tcl-devel
+tcl-tk-devel
+```
+
 ## Fedora-27 64-bit | Fedora-28 64-bit
 
 ```bash
@@ -48,7 +66,7 @@ cd ed_gtkwave
 
 # Edit the Makefile for selecting the GTKWave source version.
 vim Makefile
-PACKAGE_VERSION = 3.3.89
+PACKAGE_VERSION = 3.3.95
 ```
 
 ```bash
@@ -94,7 +112,7 @@ The build products are installed in the following locations:
 ```bash
 opt/
 └── gtkwave/
-    └── gtkwave-3.3.89/     # prefix:
+    └── gtkwave-3.3.92/     # prefix:
         ├── linux_x86_64/   # exec_prefix: 64-bit binaries and libraries for Linux
         │   └── bin/        # bindir:
         │       ├── gtkwave
