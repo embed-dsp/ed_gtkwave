@@ -1,5 +1,5 @@
 
-# Copyright (c) 2018 embed-dsp
+# Copyright (c) 2018-2020 embed-dsp
 # All Rights Reserved
 
 # $Author:   Gudmundur Bogason <gb@embed-dsp.com> $
@@ -10,15 +10,15 @@
 # Package.
 PACKAGE_NAME = gtkwave
 
-PACKAGE_VERSION = 3.3.97
+PACKAGE_VERSION = 3.3.111
 
 PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
 # ==============================================================================
 
-# Set number of simultaneous jobs (Default 4)
+# Set number of simultaneous jobs (Default 8)
 ifeq ($(J),)
-	J = 4
+	J = 8
 endif
 
 # System and Machine.
