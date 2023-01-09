@@ -32,7 +32,7 @@ cd ed_gtkwave
 
 # Edit the Makefile for selecting the GTKWave source version.
 vim Makefile
-PACKAGE_VERSION = 3.3.95
+PACKAGE_VERSION = 3.3.113
 ```
 
 ```bash
@@ -87,7 +87,7 @@ FIXME: linux, arm, ...
 ```bash
 opt/
 └── gtkwave/
-    └── gtkwave-3.3.95/     # prefix:
+    └── gtkwave-3.3.113/    # prefix:
         ├── linux_x86_64/   # exec_prefix: 64-bit binaries and libraries for Linux
         │   └── bin/        # bindir:
         │       ├── gtkwave
@@ -104,7 +104,7 @@ FIXME: windows 64-bit, mingw32, mingw64
 ```bash
 /c/opt/
 └── gtkwave/
-    └── gtkwave-3.3.95/     # prefix:
+    └── gtkwave-3.3.113/    # prefix:
         ├── mingw64_x86_64/ # exec_prefix: 64-bit binaries and libraries for MSYS2/mingw64 on a 64-bit Windows
         │   └── bin/        # bindir:
         │       ├── gtkwave
@@ -122,22 +122,19 @@ FIXME: windows 64-bit, mingw32, mingw64
 
 System  | M=                | M=32  
 --------|-------------------|-------------------
-linux   | Fedora-28 64-bit  | **FIXME**
+linux   | Fedora-37 64-bit  | **FIXME**
 mingw64 | Windows-10 64-bit |
 mingw32 | Windows-10 64-bit |
 cygwin  | **FIXME**         |
 
 This has been testes with the following Linux distributions and compilers:
-* `Fedora-27 (64-bit)`
-    * `gcc-7.2.1`
-    * `gcc-7.3.1`
-* `Fedora-28 (64-bit)`
-    * `gcc-8.1.1`
+* `Fedora-37 (64-bit)`
+    * `gcc-12.2.1`
 
 
 # Prerequisites
 
-## Fedora-27 64-bit | Fedora-28 64-bit
+## Fedora-37 64-bit
 FIXME: Refer to the Fedora guides.
 
 ```bash
