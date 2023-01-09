@@ -1,18 +1,36 @@
 
-# Copyright (c) 2018-2020 embed-dsp
-# All Rights Reserved
-
-# $Author:   Gudmundur Bogason <gb@embed-dsp.com> $
-# $Date:     $
-# $Revision: $
+# Copyright (c) 2018-2023 embed-dsp, All Rights Reserved.
+# Author: Gudmundur Bogason <gb@embed-dsp.com>
 
 
-# Package.
 PACKAGE_NAME = gtkwave
 
-PACKAGE_VERSION = 3.3.111
+PACKAGE_VERSION = 3.3.113
 
 PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
+
+# ==============================================================================
+
+# Determine system.
+SYSTEM = unknown
+ifeq ($(findstring Linux, $(shell uname -s)), Linux)
+	SYSTEM = linux
+endif
+ifeq ($(findstring MINGW32, $(shell uname -s)), MINGW32)
+	SYSTEM = mingw32
+endif
+ifeq ($(findstring MINGW64, $(shell uname -s)), MINGW64)
+	SYSTEM = mingw64
+endif
+ifeq ($(findstring CYGWIN, $(shell uname -s)), CYGWIN)
+	SYSTEM = cygwin
+endif
+
+# Determine machine.
+MACHINE = $(shell uname -m)
+
+# Architecture.
+ARCH = $(SYSTEM)_$(MACHINE)
 
 # ==============================================================================
 
@@ -21,17 +39,13 @@ ifeq ($(J),)
 	J = 8
 endif
 
-# System and Machine.
-SYSTEM = $(shell ./bin/get_system.sh)
-MACHINE = $(shell ./bin/get_machine.sh)
-
 # System configuration.
 CONFIGURE_FLAGS =
 
 # Compiler.
 CFLAGS = -Wall -O2
 
-# Linux system.
+# Configuration for linux system.
 ifeq ($(SYSTEM),linux)
 	# Compile for 32-bit on a 64-bit machine.
 	ifeq ("$(MACHINE):$(M)","x86_64:32")
@@ -44,15 +58,7 @@ ifeq ($(SYSTEM),linux)
 	INSTALL_DIR = /opt
 endif
 
-# Cygwin system.
-ifeq ($(SYSTEM),cygwin)
-	# Compiler.
-	CC = /usr/bin/gcc
-	# Installation directory.
-	INSTALL_DIR = /cygdrive/c/opt
-endif
-
-# MSYS2/mingw32 system.
+# Configuration for mingw32 system.
 ifeq ($(SYSTEM),mingw32)
 	# System configuration.
 	CONFIGURE_FLAGS += --with-tcl=/mingw32/lib --with-tk=/mingw32/lib
@@ -62,7 +68,7 @@ ifeq ($(SYSTEM),mingw32)
 	INSTALL_DIR = /c/opt
 endif
 
-# MSYS2/mingw64 system.
+# Configuration for mingw64 system.
 ifeq ($(SYSTEM),mingw64)
 	# System configuration.
 	CONFIGURE_FLAGS += --with-tcl=/mingw64/lib --with-tk=/mingw64/lib
@@ -72,12 +78,19 @@ ifeq ($(SYSTEM),mingw64)
 	INSTALL_DIR = /c/opt
 endif
 
-# Architecture.
-ARCH = $(SYSTEM)_$(MACHINE)
+# Configuration for cygwin system.
+ifeq ($(SYSTEM),cygwin)
+	# Compiler.
+	CC = /usr/bin/gcc
+	# Installation directory.
+	INSTALL_DIR = /cygdrive/c/opt
+endif
 
 # Installation directory.
 PREFIX = $(INSTALL_DIR)/$(PACKAGE_NAME)/$(PACKAGE)
 EXEC_PREFIX = $(PREFIX)/$(ARCH)
+
+# ==============================================================================
 
 
 all:
