@@ -5,7 +5,7 @@
 
 PACKAGE_NAME = gtkwave
 
-PACKAGE_VERSION = 3.3.113
+PACKAGE_VERSION = 3.3.119
 
 PACKAGE = $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
@@ -21,9 +21,6 @@ ifeq ($(findstring MINGW32, $(shell uname -s)), MINGW32)
 endif
 ifeq ($(findstring MINGW64, $(shell uname -s)), MINGW64)
 	SYSTEM = mingw64
-endif
-ifeq ($(findstring CYGWIN, $(shell uname -s)), CYGWIN)
-	SYSTEM = cygwin
 endif
 
 # Determine machine.
@@ -47,11 +44,6 @@ CFLAGS = -Wall -O2
 
 # Configuration for linux system.
 ifeq ($(SYSTEM),linux)
-	# Compile for 32-bit on a 64-bit machine.
-	ifeq ("$(MACHINE):$(M)","x86_64:32")
-		MACHINE = "x86"
-		CFLAGS += -m32
-	endif
 	# Compiler.
 	CC = /usr/bin/gcc
 	# Installation directory.
@@ -78,14 +70,6 @@ ifeq ($(SYSTEM),mingw64)
 	INSTALL_DIR = /c/opt
 endif
 
-# Configuration for cygwin system.
-ifeq ($(SYSTEM),cygwin)
-	# Compiler.
-	CC = /usr/bin/gcc
-	# Installation directory.
-	INSTALL_DIR = /cygdrive/c/opt
-endif
-
 # Installation directory.
 PREFIX = $(INSTALL_DIR)/$(PACKAGE_NAME)/$(PACKAGE)
 EXEC_PREFIX = $(PREFIX)/$(ARCH)
@@ -102,7 +86,7 @@ all:
 	@echo ""
 	@echo "## Build"
 	@echo "make prepare"
-	@echo "make configure [M=32]"
+	@echo "make configure"
 	@echo "make compile [J=...]"
 	@echo ""
 	@echo "## Install"
